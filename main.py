@@ -1,5 +1,5 @@
 import art
-print(art.logo)
+
 
 
 def add(n1,n2):
@@ -12,24 +12,29 @@ def divide(n1,n2):
     return n1/n2
 
 operations= {    
-    "+": "add",
-    "-": "subtract",
-    "*": "multiply",
-    "/": "divide",
+    "+": add,
+    "-": subtract,
+    "*": multiply,
+    "/": divide,
 }
+def calculator():
+    print(art.logo)
+    num1 = float(input("What's the first number?: \n"))
+    should_continue = True
+    while should_continue == True:
+        num2 = float(input("What's the next number?: \n"))
+        for symbol in operations:
+            print(symbol)
+        operation_symbol = input("Pick an operation: \n")
+        calculation_function = operations[operation_symbol]
+        answer = round(calculation_function(num1,num2),2)
+        print(f"{num1} {operation_symbol} {num2} = {answer}")
+        continuation = input(f"Type 'y' to continue calculating with {answer}, or 'n' to start a new calculation:\n")
+        if continuation == 'y':
+            num1 = answer
+        elif continuation == 'n':
+            should_continue = False
+            calculator()
 
-num1 = int(input("What's the first number?: \n"))
-num2 = int(input("What's the second number?: \n"))
-for symbol in operations:
-    print(symbol)
-operation_symbol = input("Pick an operation from above: \n")
-results_list = []
+calculator()
 
-calculation_function = operation_symbol[operation_symbol]
-answer = calculation_function(num1,num2)
-
-
-print(f"{num1} {operation_symbol} {num2} = {results_list}")
-
-
-# continuation = input("Type 'y' to continue calculating with {}, or 'n' to start a new calculation:\n")
